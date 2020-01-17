@@ -1,0 +1,64 @@
+{
+  "name": "@duzun/async-series",
+  "version": "1.0.0",
+  "description": "Asynchronously process a list of items consecutively",
+  "module": "index.js",
+  "main": "dist/asyncSeries.js",
+  "unpkg": "dist/asyncSeries.min.js",
+  "reveal": true,
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "test": "npx mocha --reporter spec",
+    "coverage": "npx nyc --reporter=lcov --reporter=text-summary npm run test",
+    "jest": "npx jest",
+    "jest:watch": "npx jest --watch",
+    "jest:cov": "npx jest --coverage",
+    "verup": "verup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duzun/asyncSeries.js.git"
+  },
+  "keywords": [
+    "Promise",
+    "each",
+    "forEach",
+    "map",
+    "reduce",
+    "async",
+    "list",
+    "array"
+  ],
+  "author": "Dumitru Uzun <contact@duzun.me> (https://DUzun.Me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duzun/asyncSeries.js/issues"
+  },
+  "homepage": "https://github.com/duzun/asyncSeries.js#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "rollup": "^1.27.8",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-terser": "^5.1.2",
+    "verup": "^1.7"
+  },
+  "browserslist": "> 0.25%, not dead",
+  "jshintConfig": {
+    "esversion": 9,
+    "laxbreak": true,
+    "laxcomma": true,
+    "undef": true,
+    "unused": true,
+    "sub": true,
+    "expr": true,
+    "bitwise": false,
+    "eqeqeq": false,
+    "boss": true,
+    "eqnull": true,
+    "scripturl": true,
+    "-W041": false
+  }
+}

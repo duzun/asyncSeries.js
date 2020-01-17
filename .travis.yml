@@ -1,0 +1,39 @@
+os: linux
+language: node_js
+
+node_js:
+    - "stable"
+    - "13.0"
+    - "12.0"
+    - "11.0"
+    - "10.0"
+
+
+jobs:
+    fast_finish: true
+    allow_failures:
+        - node_js: '10.0'
+        - node_js: '11.0'
+
+cache:
+    directories:
+        - node_modules
+
+before_script:
+    - command -v npx || npm i -g npx
+
+script:
+    - npm run coverage
+
+after_script:
+    - npm install codecov
+    - ./node_modules/.bin/codecov
+
+deploy:
+    provider: npm
+    email: contact@duzun.me
+    api_token:
+        secure: UeTmKdjg0MEmy8iK0ZmlmNww+hytHQoEkh7uhssV2Pizq2sSEKki9m64v7xe35Kwk38TcbMvrZkwtim/ZnZt1JJ2LOw8Ogz88OVviqAfkHOe2VRH8SrP3NpRFGFWLZ0JmvKGkvCLiDkLHiz+vSegUXDPwyGdpS932lyxJ5U3ntE=
+    on:
+        tags: true
+        repo: duzun/asyncSeries.js
