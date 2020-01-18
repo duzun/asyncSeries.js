@@ -4,14 +4,66 @@ Asynchronously process a list of items consecutively.
 
 Even though the processing is asynchronous, it is never done in parallel.
 
+## Install
+
+```sh
+npm i -S @duzun/async-series
+```
+
+## Import or require?
+
+This library can be included either as an ESM or UMD.
+
+#### ESM
+
+```js
+import {
+    forEach as serialEach,
+    map     as serialMap,
+    reduce  as serialReduce
+} from '@duzun/async-series';
+```
+
+#### CommonJS
+
+```js
+const {
+    forEach: serialEach,
+    map    : serialMap,
+    reduce : serialReduce,
+} = require('@duzun/async-series');
+```
+
+#### AMD
+
+```js
+require('https://unpkg.com/@duzun/async-series', (asyncSeries) => {
+    const {
+        forEach: serialEach,
+        map    : serialMap,
+        reduce : serialReduce,
+    } = asyncSeries;
+
+    // ...
+});
+```
+
+#### Browser
+
+```html
+<script src="https://unpkg.com/@duzun/async-series"></script>
+```
+
+## Usage by example
+
 ### forEach(array, iteratee)
 ##### Where `[async ]iteratee(value, index, array)`
 
-**Eg.** Process file contents of a directory, asynchronously & consecutively.
+Process file contents of a directory, asynchronously & consecutively.
 
 ```js
 const fs = require('mz/fs');
-const { forEach: serialEach } = require('async-series');
+const { forEach: serialEach } = require('@duzun/async-series');
 
 (async () => {
     let files = await fs.readdir('.');
@@ -27,11 +79,11 @@ const { forEach: serialEach } = require('async-series');
 ### map(array, iteratee[, firstValue])
 ##### Where `[async ]iteratee(value, index, array)`
 
-**Eg.** Get file contents of a directory, asynchronously & consecutively;
+Get file contents of a directory, asynchronously & consecutively;
 
 ```js
 const fs = require('mz/fs');
-const { map: serialMap } = require('async-series');
+const { map: serialMap } = require('@duzun/async-series');
 
 (async () => {
     let files = await fs.readdir('.');
@@ -46,11 +98,11 @@ const { map: serialMap } = require('async-series');
 ### reduce(array, reducer[, initialValue])
 ##### Where `[async ]reducer(accumulator, currentValue, index, array)`
 
-**Eg.** Calculate file sizes in a directory, asynchronously & consecutively.
+Calculate file sizes in a directory, asynchronously & consecutively.
 
 ```js
 const fs = require('mz/fs');
-const { reduce: serialReduce } = require('async-series');
+const { reduce: serialReduce } = require('@duzun/async-series');
 
 (async () => {
     let files = await fs.readdir('.');
@@ -64,3 +116,13 @@ const { reduce: serialReduce } = require('async-series');
 })();
 
 ```
+
+## Why?
+
+Why not? :)
+
+I know, there is a great library [Async.js](https://caolan.github.io/async/), which already has [eachSeries](https://caolan.github.io/async/v3/docs.html#eachSeries), [mapSeries](https://caolan.github.io/async/v3/docs.html#mapSeries) and [reduce](https://caolan.github.io/async/v3/docs.html#reduce) and many other functions.
+
+This library is **< 900 bytes** minified, and **< 500 bytes** when also gzipped.
+
+And if you include it with [rollup.js](https://rollupjs.org/), you only get the function you've imported.

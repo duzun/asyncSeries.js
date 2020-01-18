@@ -1,6 +1,6 @@
 {
   "name": "@duzun/async-series",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Asynchronously process a list of items consecutively",
   "module": "index.js",
   "main": "dist/asyncSeries.js",
@@ -60,5 +60,13 @@
     "eqnull": true,
     "scripturl": true,
     "-W041": false
+  },
+  "extra": {
+    "verup": {
+      "files": [
+        "package-lock.json",
+        "index.js"
+      ]
+    }
   }
 }

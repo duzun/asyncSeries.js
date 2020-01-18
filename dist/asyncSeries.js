@@ -11,6 +11,7 @@
      * @param Function(value, index, array) iteratee
      *
      * @return Promise resolve when done, reject on first error
+     * @version 1.0.1
      */
     function forEach(array, iteratee) {
       const {
@@ -33,6 +34,7 @@
      * @param any firstValue The `prevValue` of first call to iteratee
      *
      * @return Promise(array) array mapped, reject on first error
+     * @version 1.0.1
      */
 
     function map(array, iteratee, firstValue) {
@@ -63,6 +65,7 @@
      * @param any initialValue
      *
      * @return Promise(any) resolve to the last returned value when done, reject on first error
+     * @version 1.0.1
      */
 
     function reduce(array, reducer, initialValue) {

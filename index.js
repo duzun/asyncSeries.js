@@ -5,6 +5,7 @@
  * @param Function(value, index, array) iteratee
  *
  * @return Promise resolve when done, reject on first error
+ * @version 1.0.1
  */
 export function forEach(array, iteratee) {
     const { length } = array;
@@ -14,7 +15,9 @@ export function forEach(array, iteratee) {
     .then(function _proc() {
         ++index;
         if(index < length) {
-            return Promise.resolve(iteratee.call(array, array[index], index, array)).then(_proc);
+            return Promise.resolve(iteratee.call(array, array[index], index, array))
+                .then(_proc)
+            ;
         }
     });
 }
@@ -27,6 +30,7 @@ export function forEach(array, iteratee) {
  * @param any firstValue The `prevValue` of first call to iteratee
  *
  * @return Promise(array) array mapped, reject on first error
+ * @version 1.0.1
  */
 export function map(array, iteratee, firstValue) {
     const result = [];
@@ -40,7 +44,9 @@ export function map(array, iteratee, firstValue) {
         }
         ++index;
         if(index < length) {
-            return Promise.resolve(iteratee.call(array, array[index], index, array, prevValue)).then(_proc);
+            return Promise.resolve(iteratee.call(array, array[index], index, array, prevValue))
+                .then(_proc)
+            ;
         }
         return result;
     });
@@ -54,11 +60,12 @@ export function map(array, iteratee, firstValue) {
  * @param any initialValue
  *
  * @return Promise(any) resolve to the last returned value when done, reject on first error
+ * @version 1.0.1
  */
 export function reduce(array, reducer, initialValue) {
     const { length } = array;
     let index = -1;
-    if(arguments.length<3) {
+    if(arguments.length < 3) {
         initialValue = array[0];
         ++index;
     }
@@ -67,7 +74,9 @@ export function reduce(array, reducer, initialValue) {
     .then(function _proc(accumulator) {
         ++index;
         if(index < length) {
-            return Promise.resolve(reducer.call(array, accumulator, array[index], index, array)).then(_proc);
+            return Promise.resolve(reducer.call(array, accumulator, array[index], index, array))
+                .then(_proc)
+            ;
         }
         return accumulator;
     });
