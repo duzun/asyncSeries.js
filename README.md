@@ -7,7 +7,7 @@ Even though the processing is asynchronous, it is never done in parallel.
 ### forEach(array, iteratee)
 ##### Where `[async ]iteratee(value, index, array)`
 
-Process file contents of a directory, asynchronously & consecutively.
+**Eg.** Process file contents of a directory, asynchronously & consecutively.
 
 ```js
 const fs = require('mz/fs');
@@ -15,7 +15,7 @@ const { forEach: serialEach } = require('async-series');
 
 (async () => {
     let files = await fs.readdir('.');
-    let results = await serialMap(files, async (filename, idx) => {
+    let results = await serialEach(files, async (filename, idx) => {
         if((await fs.stat(filename)).isDirectory()) return;
         let contents = await fs.readFile(filename);
 
@@ -27,7 +27,7 @@ const { forEach: serialEach } = require('async-series');
 ### map(array, iteratee[, firstValue])
 ##### Where `[async ]iteratee(value, index, array)`
 
-Get file contents of a directory, asynchronously & consecutively;
+**Eg.** Get file contents of a directory, asynchronously & consecutively;
 
 ```js
 const fs = require('mz/fs');
@@ -46,7 +46,7 @@ const { map: serialMap } = require('async-series');
 ### reduce(array, reducer[, initialValue])
 ##### Where `[async ]reducer(accumulator, currentValue, index, array)`
 
-Calculate file sizes in a directory, asynchronously & consecutively.
+**Eg.** Calculate file sizes in a directory, asynchronously & consecutively.
 
 ```js
 const fs = require('mz/fs');
