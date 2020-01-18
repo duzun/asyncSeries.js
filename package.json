@@ -6,6 +6,9 @@
   "main": "dist/asyncSeries.js",
   "unpkg": "dist/asyncSeries.min.js",
   "reveal": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "test": "npx mocha --reporter spec",
