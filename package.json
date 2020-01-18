@@ -1,7 +1,7 @@
 {
   "name": "@duzun/async-series",
   "version": "1.0.1",
-  "description": "Asynchronously process a list of items consecutively",
+  "description": "Process a list of items with async iteratee in series",
   "module": "index.js",
   "main": "dist/asyncSeries.js",
   "unpkg": "dist/asyncSeries.min.js",
@@ -29,6 +29,7 @@
     "map",
     "reduce",
     "async",
+    "series",
     "list",
     "array"
   ],
