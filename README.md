@@ -10,7 +10,7 @@ Even though the processing is asynchronous, it is never done in parallel.
 npm i -S @duzun/async-series
 ```
 
-## Import or require?
+## Import or require
 
 This library can be included either as an ESM or UMD.
 
@@ -18,9 +18,9 @@ This library can be included either as an ESM or UMD.
 
 ```js
 import {
-    forEach as serialEach,
-    map     as serialMap,
-    reduce  as serialReduce
+    forEach as eachSeries,
+    map     as mapSeries,
+    reduce  as reduceSeries
 } from '@duzun/async-series';
 ```
 
@@ -28,9 +28,9 @@ import {
 
 ```js
 const {
-    forEach: serialEach,
-    map    : serialMap,
-    reduce : serialReduce,
+    forEach: eachSeries,
+    map    : mapSeries,
+    reduce : reduceSeries,
 } = require('@duzun/async-series');
 ```
 
@@ -39,9 +39,9 @@ const {
 ```js
 require('https://unpkg.com/@duzun/async-series', (asyncSeries) => {
     const {
-        forEach: serialEach,
-        map    : serialMap,
-        reduce : serialReduce,
+        forEach: eachSeries,
+        map    : mapSeries,
+        reduce : reduceSeries,
     } = asyncSeries;
 
     // ...
@@ -52,6 +52,13 @@ require('https://unpkg.com/@duzun/async-series', (asyncSeries) => {
 
 ```html
 <script src="https://unpkg.com/@duzun/async-series"></script>
+<script>
+const {
+    forEach: eachSeries,
+    map    : mapSeries,
+    reduce : reduceSeries,
+} = asyncSeries;
+</script>
 ```
 
 ## Usage by example
@@ -63,11 +70,11 @@ Process file contents of a directory, asynchronously & consecutively.
 
 ```js
 const fs = require('mz/fs');
-const { forEach: serialEach } = require('@duzun/async-series');
+const { forEach: eachSeries } = require('@duzun/async-series');
 
 (async () => {
     let files = await fs.readdir('.');
-    let results = await serialEach(files, async (filename, idx) => {
+    let results = await eachSeries(files, async (filename, idx) => {
         if((await fs.stat(filename)).isDirectory()) return;
         let contents = await fs.readFile(filename);
 
@@ -83,11 +90,11 @@ Get file contents of a directory, asynchronously & consecutively;
 
 ```js
 const fs = require('mz/fs');
-const { map: serialMap } = require('@duzun/async-series');
+const { map: mapSeries } = require('@duzun/async-series');
 
 (async () => {
     let files = await fs.readdir('.');
-    let contents = await serialMap(files, async (filename, idx) => {
+    let contents = await mapSeries(files, async (filename, idx) => {
         if((await fs.stat(filename)).isDirectory()) return;
         return fs.readFile(filename, 'utf8');
     });
@@ -102,11 +109,11 @@ Calculate file sizes in a directory, asynchronously & consecutively.
 
 ```js
 const fs = require('mz/fs');
-const { reduce: serialReduce } = require('@duzun/async-series');
+const { reduce: reduceSeries } = require('@duzun/async-series');
 
 (async () => {
     let files = await fs.readdir('.');
-    let size = await serialReduce(files, async (size, filename, idx) => {
+    let size = await reduceSeries(files, async (size, filename, idx) => {
         let stats = await fs.stat(filename);
         if(stats.isDirectory()) return size;
         return size + stats.size;

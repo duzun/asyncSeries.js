@@ -5,6 +5,12 @@
   "module": "index.js",
   "main": "dist/asyncSeries.js",
   "unpkg": "dist/asyncSeries.min.js",
+  "files": [
+    "index.js",
+    "dist/*.js",
+    "dist/*.js.map",
+    "README.md"
+  ],
   "reveal": true,
   "publishConfig": {
     "access": "public"

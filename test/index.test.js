@@ -1,16 +1,20 @@
 /*globals require,describe,it*/
 
-const { forEach: serialEach, map: serialMap, reduce: serialReduce } = require('..');
+const {
+    forEach: eachSeries,
+    map: mapSeries,
+    reduce: reduceSeries,
+} = require('..');
 
 require('chai').should();
 
 const wait = (timeout) => new Promise(resolve => setTimeout(resolve, timeout));
 
-describe(`serialEach(array, iteratee)`, () => {
+describe(`forEach(array, iteratee)`, () => {
     it(`should process the list with a synchronous callback asynchronously`, () => {
         let a = [1,2,3,4,5];
         let n = a.length;
-        let prom = serialEach(a, (val, idx) => {
+        let prom = eachSeries(a, (val, idx) => {
             val.should.equal(a[idx]);
             n--;
         })
@@ -28,7 +32,7 @@ describe(`serialEach(array, iteratee)`, () => {
         let n = a.length;
         let order1 = [];
         let order2 = [];
-        await serialEach(a, async (val, idx) => {
+        await eachSeries(a, async (val, idx) => {
             val.should.equal(a[idx]);
             n--;
             order1.push(idx);
@@ -41,12 +45,12 @@ describe(`serialEach(array, iteratee)`, () => {
     });
 });
 
-describe(`serialMap`, () => {
+describe(`map`, () => {
     describe(`(array, syncFn)`, () => {
         it(`should process the list with a synchronous callback asynchronously`, () => {
             let a = [1,2,3,4,5];
             let n = a.length;
-            let prom = serialMap(a, (val, idx) => {
+            let prom = mapSeries(a, (val, idx) => {
                 val.should.equal(a[idx]);
                 n--;
                 return val * 2;
@@ -67,7 +71,7 @@ describe(`serialMap`, () => {
             let a = [1,2,3,4,5];
             let n = a.length;
             let order = [];
-            let list = await serialMap(a, async (val, idx) => {
+            let list = await mapSeries(a, async (val, idx) => {
                 val.should.equal(a[idx]);
                 n--;
                 await wait(12 - idx*2);
@@ -88,11 +92,11 @@ describe(`serialMap`, () => {
     });
 });
 
-describe(`serialReduce`, () => {
+describe(`reduce`, () => {
     let array = [5,4,3,2,1];
     describe(`(array, reducer)`, () => {
         it(`should do nothing for an empty array, but return a promise`, () => {
-            let prom = serialReduce([], () => {
+            let prom = reduceSeries([], () => {
                 'called'.should.equal('never');
             });
             (typeof prom.then).should.equal('function');
@@ -104,7 +108,7 @@ describe(`serialReduce`, () => {
 
         it(`should do nothing for one element array, but return a Promise(array[0])`, () => {
             let array = ['one']
-            let prom = serialReduce(array, () => {
+            let prom = reduceSeries(array, () => {
                 'called'.should.equal('never');
             });
             (typeof prom.then).should.equal('function');
@@ -116,17 +120,17 @@ describe(`serialReduce`, () => {
 
         it(`should reduce the array`, async () => {
 
-            let sum = await serialReduce(array, (acc, val) => acc + val);
+            let sum = await reduceSeries(array, (acc, val) => acc + val);
             sum.should.equal(15);
 
-            let fac = await serialReduce(array, async (acc, val) => acc * val);
+            let fac = await reduceSeries(array, async (acc, val) => acc * val);
             fac.should.equal(120);
         });
 
         it(`should reduce the list in order`, async () => {
             let order1 = [];
             let order2 = [];
-            let sum = await serialReduce(array, async (acc, val, idx) => {
+            let sum = await reduceSeries(array, async (acc, val, idx) => {
                 order1.push(idx);
                 await wait(12 - idx*2);
                 order2.push(idx);
@@ -141,17 +145,17 @@ describe(`serialReduce`, () => {
 
     describe(`(array, reducer, initialValue)`, () => {
       it(`should reduce the array`, async () => {
-            let sum = await serialReduce(array, async (acc, val) => acc + val, 10);
+            let sum = await reduceSeries(array, async (acc, val) => acc + val, 10);
             sum.should.equal(25);
 
-            let fac = await serialReduce(array, (acc, val) => acc * val, 1/120);
+            let fac = await reduceSeries(array, (acc, val) => acc * val, 1/120);
             fac.should.equal(1);
         });
 
         it(`should reduce the list in order`, async () => {
             let order1 = [];
             let order2 = [];
-            let sum = await serialReduce(array, async (acc, val, idx) => {
+            let sum = await reduceSeries(array, async (acc, val, idx) => {
                 order1.push(idx);
                 await wait(12 - idx*2);
                 order2.push(idx);
