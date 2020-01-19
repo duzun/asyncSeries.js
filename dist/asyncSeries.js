@@ -11,13 +11,11 @@
      * @param Function(value, index, array) iteratee
      *
      * @return Promise resolve when done, reject on first error
-     * @version 1.0.1
+     * @version 1.0.2
      */
     function forEach(array, iteratee) {
-      const {
-        length
-      } = array;
-      let index = -1;
+      var length = array.length;
+      var index = -1;
       return Promise.resolve().then(function _proc() {
         ++index;
 
@@ -34,15 +32,13 @@
      * @param any firstValue The `prevValue` of first call to iteratee
      *
      * @return Promise(array) array mapped, reject on first error
-     * @version 1.0.1
+     * @version 1.0.2
      */
 
     function map(array, iteratee, firstValue) {
-      const result = [];
-      const {
-        length
-      } = array;
-      let index = -1;
+      var result = [];
+      var length = array.length;
+      var index = -1;
       return Promise.resolve(firstValue).then(function _proc(prevValue) {
         if (index >= 0) {
           result[index] = prevValue;
@@ -65,14 +61,12 @@
      * @param any initialValue
      *
      * @return Promise(any) resolve to the last returned value when done, reject on first error
-     * @version 1.0.1
+     * @version 1.0.2
      */
 
     function reduce(array, reducer, initialValue) {
-      const {
-        length
-      } = array;
-      let index = -1;
+      var length = array.length;
+      var index = -1;
 
       if (arguments.length < 3) {
         initialValue = array[0];
