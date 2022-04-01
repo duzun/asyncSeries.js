@@ -1,4 +1,4 @@
-# asyncSeries.js [![Build Status](https://travis-ci.org/duzun/asyncSeries.js.svg?branch=master)](https://travis-ci.org/duzun/asyncSeries.js) [![codecov](https://codecov.io/gh/duzun/asyncSeries.js/branch/master/graph/badge.svg)](https://codecov.io/gh/duzun/asyncSeries.js)
+# asyncSeries.js [![Build Status](https://app.travis-ci.com/duzun/asyncSeries.js.svg?branch=master)](https://app.travis-ci.com/duzun/asyncSeries.js) [![codecov](https://codecov.io/gh/duzun/asyncSeries.js/branch/master/graph/badge.svg)](https://codecov.io/gh/duzun/asyncSeries.js)
 
 Asynchronously process a list of items consecutively.
 
