@@ -3,6 +3,7 @@ language: node_js
 
 node_js:
     - "stable"
+    - "16.0"
     - "13.0"
     - "12.0"
     - "11.0"
@@ -14,6 +15,7 @@ jobs:
     allow_failures:
         - node_js: '10.0'
         - node_js: '11.0'
+        - node_js: '13.0'
 
 cache:
     directories:
