@@ -11,7 +11,7 @@ type ReduceIterateeFunction = (this: Array<ItemType>, accumulator: ReturnType, v
  * @param Function(value, index, array) iteratee
  *
  * @return Promise resolve when done, reject on first error
- * @version 1.0.3
+ * @version 1.0.4
  */
 export function forEach(array: Array<ItemType>, iteratee: IterateeFunction): Promise<void> {
     const { length } = array;
@@ -36,7 +36,7 @@ export function forEach(array: Array<ItemType>, iteratee: IterateeFunction): Pro
  * @param any firstValue The `prevValue` of first call to iteratee
  *
  * @return Promise(array) array mapped, reject on first error
- * @version 1.0.3
+ * @version 1.0.4
  */
 export function map(array: Array<ItemType>, iteratee: MapIterateeFunction, firstValue: ReturnType): Promise<Array<ReturnType>> {
     const result = [];
@@ -66,7 +66,7 @@ export function map(array: Array<ItemType>, iteratee: MapIterateeFunction, first
  * @param any initialValue
  *
  * @return Promise(any) resolve to the last returned value when done, reject on first error
- * @version 1.0.3
+ * @version 1.0.4
  */
 export function reduce(array: Array<ItemType>, reducer: ReduceIterateeFunction, initialValue: ReturnType): Promise<ReturnType> {
     const { length } = array;

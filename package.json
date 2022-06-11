@@ -1,6 +1,6 @@
 {
   "name": "@duzun/async-series",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Process a list of items with async iteratee in series",
   "module": "index.js",
   "main": "dist/asyncSeries.js",
