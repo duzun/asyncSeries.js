@@ -10,18 +10,15 @@
 export function forEach(array, iteratee) {
     const { length } = array;
     let index = -1;
-
     return Promise.resolve()
-    .then(function _proc() {
+        .then(function _proc() {
         ++index;
-        if(index < length) {
+        if (index < length) {
             return Promise.resolve(iteratee.call(array, array[index], index, array))
-                .then(_proc)
-            ;
+                .then(_proc);
         }
     });
 }
-
 /**
  * Asynchronously map a list of items, consecutively.
  *
@@ -36,22 +33,19 @@ export function map(array, iteratee, firstValue) {
     const result = [];
     const { length } = array;
     let index = -1;
-
     return Promise.resolve(firstValue)
-    .then(function _proc(prevValue) {
-        if(index >= 0) {
+        .then(function _proc(prevValue) {
+        if (index >= 0) {
             result[index] = prevValue;
         }
         ++index;
-        if(index < length) {
+        if (index < length) {
             return Promise.resolve(iteratee.call(array, array[index], index, array, prevValue))
-                .then(_proc)
-            ;
+                .then(_proc);
         }
         return result;
     });
 }
-
 /**
  * Asynchronously reduce a list of items, consecutively.
  *
@@ -65,18 +59,16 @@ export function map(array, iteratee, firstValue) {
 export function reduce(array, reducer, initialValue) {
     const { length } = array;
     let index = -1;
-    if(arguments.length < 3) {
+    if (arguments.length < 3) {
         initialValue = array[0];
         ++index;
     }
-
     return Promise.resolve(initialValue)
-    .then(function _proc(accumulator) {
+        .then(function _proc(accumulator) {
         ++index;
-        if(index < length) {
+        if (index < length) {
             return Promise.resolve(reducer.call(array, accumulator, array[index], index, array))
-                .then(_proc)
-            ;
+                .then(_proc);
         }
         return accumulator;
     });
