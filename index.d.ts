@@ -1,8 +1,8 @@
-declare type ItemType = any;
-declare type ReturnType = any;
-declare type IterateeFunction = (this: Array<ItemType>, value: ItemType, index: number, list: Array<ItemType>) => Promise<ReturnType> | ReturnType;
-declare type MapIterateeFunction = (this: Array<ItemType>, value: ItemType, index: number, list: Array<ItemType>, prevValue: ReturnType) => Promise<ReturnType> | ReturnType;
-declare type ReduceIterateeFunction = (this: Array<ItemType>, accumulator: ReturnType, value: ItemType, index: number, list: Array<ItemType>, prevValue: ReturnType) => Promise<ReturnType> | ReturnType;
+type ItemType = any;
+type ReturnType = any;
+type IterateeFunction = (this: Array<ItemType>, value: ItemType, index: number, list: Array<ItemType>) => Promise<ReturnType> | ReturnType;
+type MapIterateeFunction = (this: Array<ItemType>, value: ItemType, index: number, list: Array<ItemType>, prevValue: ReturnType) => Promise<ReturnType> | ReturnType;
+type ReduceIterateeFunction = (this: Array<ItemType>, accumulator: ReturnType, value: ItemType, index: number, list: Array<ItemType>, prevValue: ReturnType) => Promise<ReturnType> | ReturnType;
 /**
  * Asynchronously process a list of items, consecutively.
  *
